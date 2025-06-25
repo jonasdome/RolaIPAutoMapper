@@ -12,6 +12,9 @@ RolaIPAutoMapper utiliza o tun2socks para redirecionar o tráfego do Ragnarok On
 - Extraia o conteúdo do arquivo ZIP em uma pasta de sua escolha.
 - Faça o download do Wintun [aqui](https://www.wintun.net/builds/wintun-0.14.1.zip) e extraia o conteúdo na mesma pasta do tun2socks.
 - Adicione o caminho da pasta onde o tun2socks e o Wintun foram extraídos à variável de ambiente `PATH` do Windows. Isso pode ser feito através das configurações avançadas do sistema.
+- Abra um novo terminal e execute o comando tun2socks, deve retornar algo parecido com isso:
+![image](https://github.com/user-attachments/assets/6c69c75a-a798-491d-acbe-e5dff03d91bb)
+
 
 # *Para mais exemplos de como tun2socks funciona, você pode verificar [aqui](https://github.com/xjasonlyu/tun2socks/wiki/Examples)
 
@@ -31,4 +34,7 @@ RolaIPAutoMapper utiliza o tun2socks para redirecionar o tráfego do Ragnarok On
 # Como o RolaIPAutoMapper consegue resolver o problema de conexão?
 
 O RolaIPAutoMapper utiliza o tun2socks para se comunicar com os servidores da LATAM através de um proxy residencial, fazendo com que o acesso aparente vir de dentro da América Latina.
+
+![image](https://github.com/user-attachments/assets/d7b7a5f9-a356-4871-b983-4249c9034d62)
+
 

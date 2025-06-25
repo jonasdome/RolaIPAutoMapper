@@ -1,9 +1,8 @@
-name: Build Win32 and Win64
+name: Build and Upload Release Assets
 
 on:
-  push:
-    tags:
-      - '*'
+  release:
+    types: [created]
 
 jobs:
   build:
@@ -20,21 +19,29 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
-          dotnet-version: '9.0.x'
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
         run: dotnet restore
 
-      - name: Publish single-file Windows binary (${{ matrix.runtime }})
+      - name: Publish self-contained single file for ${{ matrix.runtime }}
         run: |
           dotnet publish -c Release -r ${{ matrix.runtime }} --self-contained true \
             -p:PublishSingleFile=true \
             -p:IncludeNativeLibrariesForSelfExtract=true \
             -p:EnableCompressionInSingleFile=true \
+            -p:Version=${{ github.event.release.tag_name }} \
             -o ./publish/${{ matrix.runtime }}
 
-      - name: Upload artifact
-        uses: actions/upload-artifact@v4
+      - name: Zip published output for ${{ matrix.runtime }}
+        run: |
+          cd publish/${{ matrix.runtime }}
+          zip -r ../../myapp-${{ matrix.runtime }}-${{ github.event.release.tag_name }}.zip .
+
+      - name: Upload release asset (${{ matrix.runtime }})
+        uses: actions/upload-release-asset@v1
         with:
-          name: myapp-${{ matrix.runtime }}
-          path: ./publish/${{ matrix.runtime }}
+          upload_url: ${{ github.event.release.upload_url }}
+          asset_path: ./myapp-${{ matrix.runtime }}-${{ github.event.release.tag_name }}.zip
+          asset_name: myapp-${{ matrix.runtime }}-${{ github.event.release.tag_name }}.zip
+          asset_content_type: application/zip

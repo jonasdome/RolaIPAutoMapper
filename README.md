@@ -1,17 +1,23 @@
 # RolaIPAutoMapper
 
-Essa aplicação tem como objetivo criar um SOCKS5 com proxy residencial na América Latina para usuários que estão fora da LATAM e estão recebendo a mensagem "Desconectado do Servidor".
+RolaIPAutoMapper utiliza o tun2socks para redirecionar o tráfego do Ragnarok Online através de um proxy e resolve automaticamente todos os IPs do Rola, permitindo que jogadores fora da América Latina consigam se conectar aos servidores do jogo.
 
 # RolaIPAutoMapper depende de outros dois softwares:
 
 - [tun2socks por xjasonlyu](https://github.com/xjasonlyu/tun2socks) — Cria uma rede virtual que redireciona o tráfego para um proxy usando SOCKS5.  
 - [Wintun](https://www.wintun.net/) — Utilizado pelo tun2socks.
 
-# *Por favor, siga o processo de instalação do tun2socks [aqui](https://github.com/xjasonlyu/tun2socks/wiki/Examples)
+# tun2socks Instalação
+- Faça o download da versão mais recente disponível [aqui](https://github.com/xjasonlyu/tun2socks/releases)
+- Extraia o conteúdo do arquivo ZIP em uma pasta de sua escolha.
+- Faça o download do Wintun [aqui](https://www.wintun.net/builds/wintun-0.14.1.zip) e extraia o conteúdo na mesma pasta do tun2socks.
+- Adicione o caminho da pasta onde o tun2socks e o Wintun foram extraídos à variável de ambiente `PATH` do Windows. Isso pode ser feito através das configurações avançadas do sistema.
+
+# *Para mais examplos de como tun2socks funciona, você pode verificar [aqui](https://github.com/xjasonlyu/tun2socks/wiki/Examples)
 
 # O que é necessário para rodar o RolaIPAutoMapper?
 
-É necessário instalar o tun2socks e possuir um proxy residencial na América Latina. Eu estou utilizando um IP brasileiro do serviço cheap-proxy.
+É necessário instalar o tun2socks e possuir um proxy residencial na América Latina. Eu estou utilizando um IP brasileiro do serviço [cheap-proxy](https://www.proxy-cheap.com/services/static-residential-proxies).
 
 # Como o RolaIPAutoMapper consegue resolver o problema de conexão?
 

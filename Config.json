@@ -1,0 +1,32 @@
+{
+  "DeviceName": "Ragnarok",
+  "LocalIp": "192.168.123.1",
+  "DNSServer": "8.8.8.8",
+  "Domains": [
+    "gnjoylatam.com",
+    "gameguard.co.kr",
+    "lt-account-01.gnjoylatam.com",
+    "lt-world-1-01.gnjoylatam.com",
+    "lt-world-1-03.gnjoylatam.com",
+    "lt-world-1-04.gnjoylatam.com",
+    "lt-world-1-05.gnjoylatam.com",
+    "lt-world-1-06.gnjoylatam.com",
+    "lt-world-1-07.gnjoylatam.com",
+    "lt-world-1-08.gnjoylatam.com",
+    "lt-world-1-09.gnjoylatam.com",
+    "lt-world-1-11.gnjoylatam.com",
+    "lt-world-1-12.gnjoylatam.com",
+    "lt-world-2-01.gnjoylatam.com",
+    "lt-world-2-02.gnjoylatam.com",
+    "lt-world-2-03.gnjoylatam.com",
+    "lt-world-2-04.gnjoylatam.com",
+    "lt-world-2-05.gnjoylatam.com",
+    "lt-world-2-06.gnjoylatam.com",
+    "lt-world-2-07.gnjoylatam.com",
+    "lt-world-3-01.gnjoylatam.com",
+    "lt-world-3-02.gnjoylatam.com",
+    "lt-world-3-03.gnjoylatam.com",
+    "lt-world-4-01.gnjoylatam.com",
+    "lt-world-4-02.gnjoylatam.com"
+  ]
+}

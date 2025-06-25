@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99 d17.13
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RolaIPAutoMapper", "RolaIPAutoMapper.csproj", "{B61BD1B5-3A52-4C0F-8F30-92097B73D37D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B61BD1B5-3A52-4C0F-8F30-92097B73D37D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B61BD1B5-3A52-4C0F-8F30-92097B73D37D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B61BD1B5-3A52-4C0F-8F30-92097B73D37D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B61BD1B5-3A52-4C0F-8F30-92097B73D37D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EF61CE44-4C1A-47C1-A658-C22696B651ED}
+	EndGlobalSection
+EndGlobal

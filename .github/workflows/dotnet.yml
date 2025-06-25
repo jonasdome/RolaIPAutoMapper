@@ -1,8 +1,9 @@
 name: Build Win32 and Win64
 
 on:
-  release:
-    types: [created] 
+  push:
+    tags:
+      - '*'
 
 jobs:
   build:

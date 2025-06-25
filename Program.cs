@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.IO;
 using System.Net;
+using System.Net.NetworkInformation;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -11,12 +12,13 @@ class SocksUserConfig
     public int ProxyPort { get; set; }
     public string Username { get; set; }
     public string Password { get; set; }
+    public string Interface { get; set; }
 }
 
 class AppConfig
 {
     public string DeviceName { get; set; }
-    public string LocalIp { get; set ; }
+    public string LocalIp { get; set; }
     public string DNSServer { get; set; }
     public List<string> Domains { get; set; } = new();
 }
@@ -36,7 +38,7 @@ class Program
 
     static async Task Main()
     {
-  
+
 
         await LoadOrPromptUserConfig();
         await LoadOrPromptAppConfig();
@@ -82,36 +84,6 @@ class Program
 
         Console.ReadKey();
 
-        //while (!tun2socksProcess.HasExited)
-        //{
-        //    Console.Write("> ");
-        //    var command = Console.ReadLine()?.ToLower();
-
-        //    switch (command)
-        //    {
-        //        case "status":
-        //            Console.WriteLine(tun2socksProcess.HasExited ? "tun2socks está parado." : "tun2socks está rodando.");
-        //            break;
-
-        //        case "restart":
-        //            RestartTun2Socks();
-        //            break;
-
-        //        case "show domains":
-        //            Console.WriteLine("Domínios configurados:");
-        //            appConfig.Domains.ForEach(d => Console.WriteLine($"- {d}"));
-        //            break;
-
-        //        case "exit":
-        //            Console.WriteLine("Encerrando...");
-        //            StopTun2Socks();
-        //            return;
-
-        //        default:
-        //            Console.WriteLine("Comando desconhecido. Use: status | restart | show domains | exit");
-        //            break;
-        //    }
-        //}
     }
 
 
@@ -158,6 +130,39 @@ class Program
             Console.Write("Senha (deixe em branco se não houver): ");
             userConfig.Password = Console.ReadLine();
 
+            var networkInterfaces = NetworkInterface.GetAllNetworkInterfaces().Where(ni =>
+            (ni.NetworkInterfaceType == NetworkInterfaceType.Ethernet ||
+             ni.NetworkInterfaceType == NetworkInterfaceType.Wireless80211) &&
+             ni.OperationalStatus == OperationalStatus.Up &&
+             ni.Supports(NetworkInterfaceComponent.IPv4)).ToArray();
+
+            while (true)
+            {
+                Console.WriteLine("Interfaces de rede disponíveis: ");
+
+                for (int i = 0; i < networkInterfaces?.Length; i++)
+                {
+                    var ni = networkInterfaces[i];
+                    Console.WriteLine($"{i}: {ni.Name} - {ni.Description} ({ni.NetworkInterfaceType}) - {ni.OperationalStatus}");
+                }
+
+                Console.Write("Escolha o número da interface com acesso à internet: ");
+                string input = Console.ReadLine();
+
+                if (int.TryParse(input, out int index) &&
+                    index >= 0 && index < networkInterfaces?.Length)
+                {
+                    userConfig.Interface = networkInterfaces[index].Name;
+                    Console.WriteLine($"Interface selecionada: {userConfig.Interface}");
+                    break;
+                }
+                else
+                {
+                    Console.WriteLine("Número inválido. Tente novamente.\n");
+                }
+            }
+
+
             Console.Write("Salvar configurações de proxy em userConfig.json? (s/n): ");
             if (Console.ReadLine()?.ToLower() == "s")
             {
@@ -197,7 +202,7 @@ class Program
             StartInfo = new ProcessStartInfo
             {
                 FileName = "tun2socks.exe",
-                Arguments = $"-device {appConfig.DeviceName} -proxy {proxyArg}",
+                Arguments = $"-device {appConfig.DeviceName} -proxy {proxyArg} -interface {userConfig.Interface}",
                 RedirectStandardOutput = true,
                 RedirectStandardError = true,
                 UseShellExecute = false,
@@ -209,13 +214,13 @@ class Program
         tun2socksProcess.OutputDataReceived += (s, e) =>
         {
             if (!string.IsNullOrEmpty(e.Data))
-                Console.WriteLine("[tun2socks] " + e.Data);
+                Console.WriteLine($"[TUN2SOCKS] {e.Data}");
         };
 
         tun2socksProcess.ErrorDataReceived += (s, e) =>
         {
             if (!string.IsNullOrEmpty(e.Data))
-                Console.WriteLine("[ERRO] " + e.Data);
+                Console.WriteLine($"[TUN2SOCKS] {e.Data}");
         };
 
         tun2socksProcess.Start();
